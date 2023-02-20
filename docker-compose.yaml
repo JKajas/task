@@ -1,0 +1,23 @@
+version: "1"
+services: 
+  database: 
+    env_file: 
+      - .env
+    image: postgres:14
+    healthcheck:
+        test: pg_isready -U postgres
+        interval: 3s
+        timeout: 5s
+        retries: 5
+  api: 
+    env_file:
+      - .env
+    build: . 
+    ports:
+      - "8000:8000"
+    command: bash -c "make run"
+    depends_on: 
+      database:
+        condition: service_healthy
+    volumes:
+      - .:/src

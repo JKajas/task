@@ -1,0 +1,41 @@
+[
+    {
+        "model": "thumbnails.tier",
+        "pk": 1,
+        "fields": {
+            "tier": "BASIC"
+        }
+    },
+    {
+        "model": "thumbnails.tier",
+        "pk": 2,
+        "fields": {
+            "tier": "PREMIUM",
+            "original_image": true
+        }
+    },
+    {
+        "model": "thumbnails.tier",
+        "pk": 3,
+        "fields": {
+            "tier": "ENTERPRISE",
+            "original_image": true
+        }
+    },
+    {
+        "model": "thumbnails.size",
+        "pk": 1,
+        "fields": {
+            "height": 200,
+            "tier": [1, 2, 3]
+        }
+    },
+    {
+        "model": "thumbnails.size",
+        "pk": 2,
+        "fields": {
+            "height": 400,
+            "tier": [2, 3]
+        }
+    }
+  ]

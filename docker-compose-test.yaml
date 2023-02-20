@@ -1,0 +1,21 @@
+version: "1"
+services: 
+  database_test: 
+    env_file: 
+      - .env_test
+    image: postgres:14
+    healthcheck:
+        test: pg_isready -U postgres
+        interval: 3s
+        timeout: 5s
+        retries: 5
+  api_test: 
+    env_file:
+      - .env_test
+    build: .
+    command: bash -c "coverage run --source='.' manage.py test && coverage report || coverage report"
+    depends_on: 
+      database_test:
+        condition: service_healthy
+    volumes:
+      - .:/src
